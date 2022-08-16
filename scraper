@@ -1,0 +1,18 @@
+import requests
+from bs4 import BeautifulSoup
+url = "https://summerofcode.withgoogle.com/programs/2022/organizations"
+r =  requests.get(url)
+htmlContent = r.content
+#print(htmlContent)
+
+
+soup=BeautifulSoup(htmlContent,'html.parser')
+#print(soup.prettify)
+
+anchors = soup.find_all('a')
+all_links = set()
+for link in anchors:
+    if(link.get('href') != '#'):
+        linkText = ("https://summerofcode.withgoogle.com/programs/2022/organizations" + link.get('href'))
+        all_links.add(link)
+        print(linkText)
